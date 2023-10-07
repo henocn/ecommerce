@@ -1,0 +1,29 @@
+
+<style>
+      .imgPro{
+            height: 200px;
+            width: 278px;
+      }
+</style>
+
+{% extends 'base.html' %}
+{% block title %}<title> Panier</title>{% endblock %}
+{% block content %}
+{% load humanize %}
+    <div class="row justify-content-between gy-4 pb-5">
+        <h2>En tout votre panier fait <i style="color: rgb(255, 80, 100);">{{prixTotal|intcomma}}</i> FCFA</h2>
+        {% for commande in commandes %}
+            <div class=" bg-success " style="height:300px; width: 200px;" >
+                <img class="imgPro" src="{{ commande.produit.image.url }}" alt="" style="width:inherit; margin-left: -12px;">
+                <b>Article</b> : {{ commande.produit.nom }} <br>
+                <b>Quantité</b> : {{ commande.quantite }} article(s) <br>
+                <b>PU</b> : {{commande.produit.prixDeVente }}FCFA <br>
+            </div>
+        {% endfor %}
+        <div class="row justify-content-end mt-5">
+            <a class=" col-3 btn btn-outline-danger" href="{% url 'vider_panier' %}">Supprimer le panier</a>
+            <a class="col-3 btn btn-outline-success offset-1">Valider le panier</a>
+        </div>
+    </div>
+{% endblock %}
+py

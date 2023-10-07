@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title> Accueil </title>{% endblock %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'boutique/css/bootstrap.css' %}">
+    <script src="{% static 'boutique/js/bootstrap.bundle.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'boutique/css/style.css' %}">
+</head>
+
+<body>
+<nav class="navbar fixed-top  navbar-expand-lg navbar-light bg-warning">
+    <div class="container-fluid">
+        <a class="navbar-brand align-self-center" href="{% url 'index' %}">VENTE EN LIGNE ACCUEIL </a>
+        <button class="navbar-toggler" data-bs-target="#contenu" data-bs-toggle="collapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div id="contenu" class="collapse navbar-collapse justify-content-end ">
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                <li class="nav-item">
+                    <a class="nav-link" href=" {% url 'statistique' %}">Sattistiques</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href=" {% url 'ajouter_article' %}">Ajouter un article</a>
+                </li>
+                {% endif %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'modifier' %}">Modifier le mot de passe</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'deconnexion' %}">Se deconnecter</a>
+                </li>
+
+
+                {% if user.panier %}
+                <li class="nav-item">
+                    <a class="nav-link" href=" {% url 'panier' %}">Panier ({{ user.panier.commandes.count }})</a>
+                </li>
+                {% endif %}
+
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" class="deconnecter boutton" href="{% url 'inscription' %}">S'Inscrire</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'connexion' %}">Se connecter</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5 pt-5">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<footer class="bd-footer py-3 mt-5" style="background-color: #22222230">
+  <div class="container py-3 ">
+    <div class="row justify-content-evenly d-flex">
+      <div class="col-8">
+        <h5>Informations</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2">Code ecrit par Henoc N'GASAMA developpeur informatique.</li>
+          <li class="mb-2">Code d'essai</li>
+          <li class="mb-2">Coontact +228 79966289</li>
+          <li class="mb-2">Dernière mise à jour 05 Septembre 2023</li>
+        </ul>
+      </div>
+      <div class="col-4">
+        <h5>Contact</h5>
+        <ul class="list-unstyled">
+          <li class="mb-2"><a href="#">Facebook</a></li>
+          <li class="mb-2"><a href="#">Github</a></li>
+          <li class="mb-2"><a href="#">WhatsApp</a></li>
+          <li class="mb-2"><a href="#">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

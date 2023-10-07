@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Modification de mot de passe</title>{% endblock %}
+
+{% block content %}
+    <form class="justify-content-center  d-flex" method="post" enctype="multipart/form-data" id="form">
+        {% csrf_token %}
+        <fieldset class="border p-3 col-9 bg-light">
+            <div class="row align-items-center mb-3">
+                <div class="col-6 "><img src="/media/autres/30.jpg" style="width: 60%; height: 100px;" alt=""></div>
+                <h3 class="col-6 text-end">Changer de mot de passe</h3>
+            </div>
+            <div>
+                Nom d'utilisateur: <input class="form-control form-control-sm mb-4 mt-2" type="text" name="username">
+            </div>
+            <div>
+                Mot de passe : <input class="form-control form-control-sm mb-4 mt-2" type="password" name="password" >
+            </div>
+            <div class="input-group justify-content-between">
+                <div class="col-5">Nouveau : <input class="form-control form-control-sm mb-4 mt-2" type="password" name="new_password1" id="mdp1"></div>
+                <div class="col-5">Confirmation: <input class="form-control form-control-sm mb-4 mt-2" type="password" name="new_password2" id="mdp2"></div>
+            </div>
+            
+            <button class="btn btn-danger mb-4" type="submit">Changer</button>
+            <div class="bg-warning" id="message"></div>
+        
+        </fieldset>
+    </form>
+
+    <script>
+    var myForm = document.getElementById('form');
+    myForm.addEventListener('submit', function(e){
+        var mdp1 = document.getElementById("mdp1").value;
+        var mdp2 = document.getElementById("mdp2").value;
+
+        if(mdp1 !== mdp2){
+            e.preventDefault()
+
+            boite = document.getElementById("message");
+            boite.classList.add('py-1')
+            boite.innerText = "Mots de passes différents"
+        }
+        else{
+            boite = document.getElementById("message");
+            boite.classList.remove('py-1')
+            boite.innerText = ""
+        }
+    })
+    </script>
+
+{% endblock %}

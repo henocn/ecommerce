@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Ajouter un article</title>
+{% endblock %}
+
+{% block content %}
+    <form class="justify-content-center d-flex" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="col-10 col-md-8 border p-5 m-3 bg-light">
+
+            <div class="row align-items-center mb-4">
+                <div class="col-6 "><img src="/media/autres/30.jpg" style="width: 60%; height: 100px;" alt=""></div>
+                <h1 class="col-6 text-end">Ajout D'articles</h1>
+            </div>
+
+            {{ form.as_p }}
+             <div class="justify-content-end d-flex">
+                 <button class="btn btn-primary" type="submit">Ajouter l'article</button>
+             </div>
+        </fieldset>
+    </form>
+{% endblock %}

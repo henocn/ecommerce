@@ -1,0 +1,29 @@
+
+
+body{
+    background-image: linear-gradient(to right top, rgba(174, 176, 221, 0.5), rgba(171, 228, 171, 0.6));
+    background-color: var(--purple);
+}
+div{
+    margin-top:14px;
+}
+.arriere{
+    background-color: #9a8aa055;
+    border-radius: 3px;
+}
+
+.devant{
+    border-radius: 3px;
+    height: 6px;
+    width: var(--i);
+    background-color: #393;
+    animation: henoc 5s 1 linear;
+}
+@keyframes henoc{
+    0%{
+        width: 0%;
+    }
+    to {
+        width: var(--i);
+    }
+}

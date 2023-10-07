@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title> Categorie </title>
+{% endblock %}
+
+{% block content %}
+      <h3>LES ARTICLES PRESENTS DANS LA CATEGORIE DES {{ categorie.nom.upper }}</h3>
+      <p>{{ categorie.description }}</p>
+      <div class="row justify-content-start">
+          {% for product in Products %}
+              {% if product.categorie.nom == categorie.nom %}
+                  <div class="col-6 col-md-4 card gy-4 bg-light mb-5">
+                      {% if product.quantite != 0 %}
+                        <h3>{{ product.nom }}</h3>
+                        <img class="" src="{{ product.image.url }}" alt="" style="height: 300px">
+                        <a class="btn btn-warning mb-2 mt-3" href="{{ product.slug }}">Plus d'infos</a>
+                      {% endif %}
+                  </div>
+              {% endif %}
+          {% endfor %}
+      </div>
+{% endblock %}

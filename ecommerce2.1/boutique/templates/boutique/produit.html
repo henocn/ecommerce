@@ -1,0 +1,86 @@
+<style>
+      .imgPro{
+            height: 200px;
+      }
+      .nbr{
+            width: 50px;
+      }
+</style>
+
+{% extends 'base.html' %}
+{% block title %}<title> Detail de produit </title>{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center d-flex ">
+      <form class="justify-content-center col-sm-8 col-md-4" id="form" method="post" action="{% url 'ajouter_au_panier' product.categorie.slug product.slug %}">
+      {% csrf_token %}
+            <div class="row col-12 bg-warning">
+                  <h3>{{ product.nom }}</h3>
+                  <img class="imgPro" src="{{ product.image.url }}" alt="{{ product.nom }}" style="height: 300px;">
+            </div>
+            <div class="row col-12 bg-warning">
+                  <p>{{ product.detail }}</p>
+                  <div>Prix : {{ product.prixDeVente }} FCFA</div>
+                  <div>
+                        Qunatité disponible : <span id="quantite">{{ product.quantite }}</span>
+                  </div>
+
+                  {% if user.is_authenticated %}
+                  <div class="row mt-2 mb-5 justify-content-between">
+                        <div class="col-8">
+                              <input class="form-control" type="number" id="nombre" name="quantite" value="1">
+                        </div>
+                        <button class="col-4 btn btn-primary" type="submit">Ajouter</button>
+                  </div>
+
+                  {% else %}
+                  <div>
+                        Pour effectuer des achats, veuillez vous connecter ou vous inscrire <a href="{% url 'connexion' %}">ici</a>
+                  </div>
+                  {% endif %}
+                  <div id="element" class="bg-danger"></div>
+            </div>
+            
+      </form>
+      <script>
+            var myForm = document.getElementById('form');
+            myForm.addEventListener('submit', function(e){
+                
+                var nombre = document.getElementById("nombre").value;
+                var quantite = parseInt(document.getElementById("quantite").textContent);
+
+                  if (nombre <= 0 || nombre > quantite){
+                        e.preventDefault();
+                        if (nombre <= 0){
+                              document.getElementById("element").innerText = "La quantité doit être superieur à zéro";
+                        }
+                        else if(nombre > quantite){
+                              document.getElementById("element").innerText = "La quantité doit être inferieur à la quantité disponible";
+                        }
+                  }
+                  else{
+                        document.getElementById("element").innerText = "";
+                  }
+            })
+      </script>
+      <div class="align-items-end col-sm-10 col-md-7 offset-md-1 ">
+            <h2 class="text">NOS ARTICLES LES PLUS APPRECIES</h2>
+            <div class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner pb-4">
+                        <div data-bs-interval="3500" class="carousel-item active ">
+                              <img src="/media/autres/30.jpg" alt="" style="width: inherit; height: 475px">
+                        </div>
+                        <div data-bs-interval="3500" class="carousel-item">
+                              <img src="/media/autres/2.jpg" alt="" style="width: inherit; height: 475px">
+                        </div>
+                        <div data-bs-interval="3500" class="carousel-item">
+                              <img src="/media/autres/3.jpg" alt="" style="width: inherit; height: 475px">
+                        </div>
+                        <div data-bs-interval="3500" class="carousel-item">
+                              <img src="/media/autres/4.jpg" alt="" style="width: inherit; height: 475px">
+                        </div>
+                  </div>
+            </div>
+      </div>
+</div>
+{% endblock %}

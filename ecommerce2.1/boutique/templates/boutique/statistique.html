@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+{% block title %}
+    <title>Statistique de ventes</title>
+{% endblock %}
+
+{% block content %}
+<h3>LES STATISTIQUES DU SITE DE VENTE</h3>
+    En tout {{ nombre_produit }} type de produits pour toute categorie confondues <br>
+    Pour un total de {{ nombre_article }} articles de tous les produits confondus <br>
+    Prix global d'achat : {{ Prix_T_achat }} FCFA <br>
+    Prix global de vente : {{ Prix_T_vente }} FCFA <br>
+    Benefice global : {{ Benefice_T }}FCFA
+
+    <div class="row mt-3 g-3 row-cols-3">
+        {% for keys, values in proprietes.items %}
+            <div class="col-4 border p-3 rounded bg-light">
+                <h4 class="text-center text-warning ">Les {{ keys }}</h4>
+                {% for key, value in values.items %}
+                    {% if key == "Prix total de vente" or key == "Prix total d'achat" or key == "Benefice total" %}
+                        <b>{{ key }}</b> : {{value}} FCFA <br>
+                    {% elif key == "Pourcentage en nombre de modele" or key == "Pourcentage en nombre d'articles" or key == "Pourcentage en benefice" %}
+                         {{ key }} : {{value}}% <br>
+                        <div class="arriere">
+                            <div class="devant" style="--i:{{value}}%;"></div>
+                        </div>
+                    {% else %}
+                         <b>{{ key }}</b> : {{value}} <br>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

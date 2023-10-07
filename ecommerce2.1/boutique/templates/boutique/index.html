@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>LES DIFFERENTES CATEGORIES DE NOS ARTICLES</h2>
+  <div class="row justify-content-start">
+      {% for categorie in Categories %}
+          <div class="col-6 col-md-4 card gy-4 bg-light">
+              <h3>{{ categorie.nom }}</h3>
+              <p>{{ categorie.description }}</p>
+              <a class="text-end btn btn-warning mb-2 mt-auto" href="{{ categorie.slug }}">Details</a>
+          </div>
+      {% endfor %}
+  </div>
+{% endblock %}
+
