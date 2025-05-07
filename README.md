@@ -1,3 +1,3 @@
-Un petit projet d'apprentissage avec django
 Site de E-Commerce
-auteur Henoc
+---
+Un petit projet d'apprentissage avec django. Le project est un projet d'éssait et d'apprentissage du framework django.
